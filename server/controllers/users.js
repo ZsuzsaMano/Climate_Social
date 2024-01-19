@@ -15,6 +15,14 @@ const postUser = (req, res) => {
 };
 
 const updateUser = (req, res) => {
+  if (req.body.myFavorites) {
+    User.updateOne(
+      { _id: req.params.id },
+      { $set: { myFavorites: JSON.stringify(req.body.myFavorites) } }
+    )
+      .then((res) => console.log("favorites updated"))
+      .catch((err) => res.status(404).json("error updating favorites"));
+  } else {
     User.updateOne(
       { _id: req.params.id },
       {
@@ -23,7 +31,9 @@ const updateUser = (req, res) => {
     )
       .then((res) => console.log("user info updated"))
       .catch((err) => res.status(404).json("error updating user info"));
+  }
 };
+
 
 const deleteUser = (req, res) => {
   User.findById(req.params.id)
