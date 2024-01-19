@@ -6,10 +6,10 @@ import Inputbar from './components/Inputbar';
 
 function App() {
   return (
-    <div className="App">
+    <div className="max-w-5xl mx-auto">
       <Header />
-      <Board />
       <Inputbar />
+      <Board />
     </div>
   );
 }
