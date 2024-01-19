@@ -1,3 +1,57 @@
+<section align="center">
+  <!-- <a href="https://starwars-squad.netlify.app/">
+    <img src="./readme.png" alt="Logo" >
+  </a> -->
+  <br>
+    <br>
+ <p>Built with: MERN  MongoDB, Express, React, Node, 
+    </p>
+
+</section>
+
+---
+
+# Climate Social Documentation
+
+### Overview
+
+Welcome to the Climate Social
+
+# Challenge - Fullstack Developer
+
+## Scope:
+
+Create a MERN Stack application using JavaScript for a social networking website.
+The application must include the following:
+
+<ol>
+<li> Backend API using Node JS</li>
+   - CRUD functionality 
+<li>Frontend using React JS </li>
+<li> Database is MongoDB </li>
+<li>The application should have the feature to upload a picture with a
+small description </li>
+<li>You can store the image directly on MongoDB as a blob as part of the
+assignment</li>
+</ol>
+
+- Push the code to a public Github repo and share the link
+- Unit tests are not necessary
+
+## Approach
+
+- read task
+- read the task again
+- plan database structure
+- create MongoDB cluster
+- set up server side and initialise react
+- start writing documentation
+- sketch wireframe
+- create frontend logic
+- finish styling
+
+---
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
