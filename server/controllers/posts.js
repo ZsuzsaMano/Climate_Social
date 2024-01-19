@@ -1,4 +1,4 @@
-const Comment =require("../models/commentSchema.js");
+const {Comment} =require("../models/commentSchema.js");
 
 const getComments = (req, res) => {
   Comment.find()
@@ -19,5 +19,5 @@ const deleteComment = (req, res) => {
 
 module.exports={
 getComments,
- postComment,
+postComment,
 deleteComment}

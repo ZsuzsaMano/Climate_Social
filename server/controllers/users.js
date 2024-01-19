@@ -1,4 +1,4 @@
-const User = require ("../models/userSchema.js");
+const {User} = require ("../models/userSchema.js");
 
 const getUsers = (req, res) => {
   User.find()
