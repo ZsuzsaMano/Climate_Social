@@ -1,12 +1,16 @@
-import React from "react";
+import React, { useContext } from "react";
 import * as dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import { CgProfile } from "react-icons/cg";
+import { DataContext } from "../context/DataContext";
 
 const SinglePost = ({ message }) => {
+  const { updateComment } = useContext(DataContext);
   dayjs.extend(relativeTime);
   const date = message.createdAt;
   const d = dayjs(date).fromNow();
+  const like = message.likeCount + 1;
+
   return (
     <div className="container bg-white rounded-xl shadow-lg w-full">
       <div className="flex p-4 justify-between items-center">
@@ -26,7 +30,10 @@ const SinglePost = ({ message }) => {
         <p className="py-8 px-4 md:px-16">{message.comment}</p>
       </div>
       <div className="flex p-4 justify-between">
-        <div className="flex space-x-1 items-center">
+        <div
+          className="flex space-x-1 items-center"
+          onClick={() => updateComment(message._id, like)}
+        >
           <span>
             <svg
               xmlns="http://www.w3.org/2000/svg"

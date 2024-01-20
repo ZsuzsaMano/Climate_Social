@@ -11,6 +11,18 @@ const postComment = (req, res) => {
   newComment.save().then((comment) => res.json(comment));
 };
 
+const updateComment = (req, res) => {
+  Comment.updateOne(
+    { _id: req.params.id },
+    {
+      $set: { likeCount: req.body.likeCount },
+    }
+  )
+    .then(() => res.status(200).json("comment updated")) 
+    .catch((err) => res.status(404).json("error updating comment info"));
+};
+
+
 const deleteComment = (req, res) => {
   Comment.findById(req.params.id)
     .then((comment) => comment.remove().then(() => res.json({ success: true })))
@@ -18,6 +30,7 @@ const deleteComment = (req, res) => {
 };
 
 module.exports={
+updateComment,
 getComments,
 postComment,
 deleteComment}

@@ -20,9 +20,16 @@ const DataContextProvider = (props) => {
       .catch((err) => console.log(err.message));
   };
 
+  const updateComment = (id, likeCount) => {
+    axios
+      .patch(`${config.serverURL}/api/comments/${id}`, { likeCount: likeCount })
+      .then((res) => console.log("liked"))
+      .catch((err) => console.log(err.message));
+  };
+
   useEffect(() => {
     getComments();
-  }, []);
+  }, [updateComment]);
   // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
@@ -33,6 +40,7 @@ const DataContextProvider = (props) => {
         comments,
         setComments,
         getComments,
+        updateComment,
       }}
     >
       {props.children}
