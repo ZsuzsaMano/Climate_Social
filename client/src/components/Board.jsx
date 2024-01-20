@@ -1,6 +1,7 @@
 import React, { useContext, useState } from "react";
 import SinglePost from "./SinglePost";
 import Loader from "./Loader";
+import Inputbar from "./Inputbar";
 import LoginButton from "./LoginButton";
 import { AuthModal } from "./AuthModal";
 import { LoginContext } from "../context/LoginContext";
@@ -30,7 +31,10 @@ const Board = () => {
 
   return (
     <div className="max-w-5xl mx-auto p-4">
-      <LoginButton setShowModal={setShowModal} />
+      <div className="text-right">
+        <LoginButton setShowModal={setShowModal} />
+      </div>
+      {isLoggedIn && <Inputbar />}
       {isShowModal && !isLoggedIn && <AuthModal setShowModal={setShowModal} />}
       {loading && <Loader />}
       {messages.toReversed().map((message) => (
