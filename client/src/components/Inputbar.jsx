@@ -17,6 +17,7 @@ const InputBar = () => {
         JSON.stringify({
           comment: postComment,
           userId: user._id,
+          userName: user.name,
         }),
         {
           headers: {
