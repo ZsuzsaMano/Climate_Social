@@ -5,7 +5,7 @@ import { CgProfile } from "react-icons/cg";
 
 const SinglePost = ({ message, user }) => {
   dayjs.extend(relativeTime);
-  const date = new Date();
+  const date = message.createdAt;
   const d = dayjs(date).toNow();
   return (
     <div className="container bg-white rounded-xl shadow-lg w-full">
@@ -27,7 +27,7 @@ const SinglePost = ({ message, user }) => {
         {message.img && (
           <img className="w-full h-full" src={message.img} alt="post" />
         )}
-        <p className="py-8 px-4 md:px-16">{message.text}</p>
+        <p className="py-8 px-4 md:px-16">{message.comment}</p>
       </div>
       <div className="flex p-4 justify-between">
         <div className="flex space-x-1 items-center">
@@ -45,7 +45,7 @@ const SinglePost = ({ message, user }) => {
               />
             </svg>
           </span>
-          <span>20</span>
+          <span>{message.likeCount}</span>
         </div>
       </div>
     </div>
