@@ -26,9 +26,7 @@ const LoginButton = ({ setShowModal }) => {
           "Login"
         )}
       </button>
-      {isDropdown && isLoggedIn && (
-        <DropdownMenu setIsDropdown={setIsDropdown} />
-      )}
+      {isDropdown && <DropdownMenu setIsDropdown={setIsDropdown} />}
     </div>
   );
 };

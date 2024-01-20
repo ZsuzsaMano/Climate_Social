@@ -11,7 +11,7 @@ export const AuthForm = ({ setShowModal }) => {
     setLogin,
     sendLogin,
   } = useContext(LoginContext);
-  const [isLogin, setIsLogin] = useState(false);
+  const [isLogin, setIsLogin] = useState(true);
 
   const handleChange = (e) => {
     const { name, value } = e.target;

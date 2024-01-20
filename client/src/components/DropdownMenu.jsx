@@ -1,8 +1,13 @@
+import { useContext } from "react";
+import { LoginContext } from "../context/LoginContext";
+
 export const DropdownMenu = ({ setIsDropdown }) => {
+  const { setIsLoggedIn } = useContext(LoginContext);
   /** when clicking logout button remove token and change login state to false*/
   const onLogout = () => {
     localStorage.removeItem("token");
     setIsDropdown(false);
+    setIsLoggedIn(false);
   };
   return (
     <div
