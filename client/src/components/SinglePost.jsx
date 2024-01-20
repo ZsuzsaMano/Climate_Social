@@ -6,7 +6,7 @@ import { CgProfile } from "react-icons/cg";
 const SinglePost = ({ message, user }) => {
   dayjs.extend(relativeTime);
   const date = message.createdAt;
-  const d = dayjs(date).toNow();
+  const d = dayjs(date).fromNow();
   return (
     <div className="container bg-white rounded-xl shadow-lg w-full">
       <div className="flex p-4 justify-between items-center">
