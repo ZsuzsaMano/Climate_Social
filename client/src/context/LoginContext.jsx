@@ -8,7 +8,10 @@ const initContext = {
   user: "",
   errorMessage: "",
   loginErrorMessage: "",
-  isLoggedIn: false,
+  isLoggedIn: () => {
+    const token = localStorage.getItem("token");
+    return token !== null;
+  },
   myFavorites: [],
   sendRegistration: () => {
     throw new Error("sendRegistration() not implemented");
@@ -21,9 +24,6 @@ const LoginContextProvider = (props) => {
   const [registration, setRegistration] = useState(initContext.registration);
   const [login, setLogin] = useState(initContext.login);
   const [errorMessage, setErrorMessage] = useState(initContext.errorMessage);
-  const [loginErrorMessage, setLoginErrorMessage] = useState(
-    initContext.loginErrorMessage
-  );
   const [isLoggedIn, setIsLoggedIn] = useState(initContext.isLoggedIn);
   const [user, setUser] = useState(initContext.user);
   const [myFavorites, setMyFavorites] = useState(initContext.myFavorites);
@@ -71,7 +71,7 @@ const LoginContextProvider = (props) => {
         setIsLoggedIn(true);
         setMyFavorites(JSON.parse(res.data.message.myFavorites));
       })
-      .catch((err) => setLoginErrorMessage(err.response.data));
+      .catch((err) => setErrorMessage(err?.response.data));
   };
 
   return (
@@ -85,7 +85,6 @@ const LoginContextProvider = (props) => {
         registration,
         setRegistration,
         errorMessage,
-        loginErrorMessage,
         isLoggedIn,
         setIsLoggedIn,
         sendRegistration,
