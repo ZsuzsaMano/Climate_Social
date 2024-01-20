@@ -2,21 +2,33 @@ import { useContext, useState } from "react";
 import { LoginContext } from "../context/LoginContext";
 
 export const AuthForm = ({ setShowModal }) => {
-  const { errorMessage, sendRegistration, registration, setRegistration } =
-    useContext(LoginContext);
+  const {
+    errorMessage,
+    sendRegistration,
+    registration,
+    setRegistration,
+    login,
+    setLogin,
+    sendLogin,
+  } = useContext(LoginContext);
   const [isLogin, setIsLogin] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setRegistration((prevState) => ({
-      ...prevState,
-      [name]: value,
-    }));
+    isLogin
+      ? setLogin((prevState) => ({
+          ...prevState,
+          [name]: value,
+        }))
+      : setRegistration((prevState) => ({
+          ...prevState,
+          [name]: value,
+        }));
   };
 
   return (
     <form
-      onSubmit={sendRegistration}
+      onSubmit={isLogin ? sendLogin : sendRegistration}
       className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none"
     >
       {/*header*/}
@@ -33,7 +45,7 @@ export const AuthForm = ({ setShowModal }) => {
             name="name"
             value={registration.name}
             onChange={handleChange}
-            required
+            required={!isLogin}
           />
         )}
         <input
@@ -41,7 +53,7 @@ export const AuthForm = ({ setShowModal }) => {
           name="email"
           type="email"
           placeholder="email"
-          value={registration.email}
+          value={isLogin ? login.email : registration.email}
           onChange={handleChange}
           required
         />
@@ -50,7 +62,7 @@ export const AuthForm = ({ setShowModal }) => {
           name="password"
           type="password"
           placeholder="password"
-          value={registration.password}
+          value={isLogin ? login.password : registration.password}
           onChange={handleChange}
           required
           minLength={6}

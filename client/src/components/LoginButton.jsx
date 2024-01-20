@@ -4,7 +4,7 @@ import { CgProfile } from "react-icons/cg";
 import { DropdownMenu } from "./DropdownMenu";
 
 const LoginButton = ({ setShowModal }) => {
-  const { isLoggedIn } = useContext(LoginContext);
+  const { user, isLoggedIn } = useContext(LoginContext);
   const [isDropdown, setIsDropdown] = useState(false);
 
   return (
@@ -17,7 +17,14 @@ const LoginButton = ({ setShowModal }) => {
             : () => setShowModal(true)
         }
       >
-        {isLoggedIn ? <CgProfile size={40} /> : "Login"}
+        {isLoggedIn ? (
+          <span className="flex gap-4 items-center">
+            <CgProfile size={40} />
+            {user.name}
+          </span>
+        ) : (
+          "Login"
+        )}
       </button>
       {isDropdown && isLoggedIn && (
         <DropdownMenu setIsDropdown={setIsDropdown} />

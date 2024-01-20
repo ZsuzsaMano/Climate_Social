@@ -39,7 +39,7 @@ mongoose
 
 // Routes
 app.use("/api", authRoutes);
-app.use("/api/posts", posts);
+app.use("/api/comments", posts);
 app.use("/api/users", users);
 
 
