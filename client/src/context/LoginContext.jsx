@@ -69,7 +69,9 @@ const LoginContextProvider = (props) => {
       .then((res) => {
         setUser(res.data.message);
         setIsLoggedIn(true);
-        setMyFavorites(JSON.parse(res.data.message.myFavorites));
+        localStorage.setItem("token", res.data.token);
+
+        //setMyFavorites(JSON.parse(res.data.message.myFavorites));
       })
       .catch((err) => setErrorMessage(err?.response.data));
   };
