@@ -7,7 +7,6 @@ const emailRegexp =
   /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
 
 const signup = (req, res, next) => {
-console.log('reqBLABLA', req.body)
   let { name, email, password } = req.body;
   let errors = [];
   if (!name) {
