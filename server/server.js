@@ -4,6 +4,7 @@ const mongoose = require("mongoose");
 const http = require("http");
 const socketIo = require("socket.io");
 const cors = require("cors");
+const bodyParser =require("body-parser");
 require("dotenv").config({ path: "./config.env" });
 
 const users = require("./routes/users.js");
@@ -12,15 +13,14 @@ const authRoutes = require("./routes/auth.js");
 
 
 const app = express();
+app.use(bodyParser.json({ limit: "30mb", extended: true }));
+app.use(
+  bodyParser.urlencoded({
+    limit: "30mb",
+    extended: true,
+  })
+);
 app.use(cors());
-
-const server = http.createServer(app);
-const io = socketIo(server, {
-  cors: {
-    origin: "*",
-    methods: ["GET", "POST"],
-  },
-});
 
 const port = process.env.PORT || 5000;
 
@@ -43,17 +43,7 @@ app.use("/api/posts", posts);
 app.use("/api/users", users);
 
 
-// Handle socket events
-io.on('connection', (socket) => {
-  console.log('New client connected');
-  socket.on('post', (data) => {
-    console.log('Message received:', data);
-    io.emit('post', data);
-  });
-  socket.on('disconnect', () => {
-    console.log('Client disconnected');
-  });
-});
+
 
 
 // Start the Express server

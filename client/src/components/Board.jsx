@@ -1,8 +1,13 @@
-import React from "react";
+import React, { useContext, useState } from "react";
 import SinglePost from "./SinglePost";
 import Loader from "./Loader";
+import LoginButton from "./LoginButton";
+import { AuthModal } from "./AuthModal";
+import { LoginContext } from "../context/LoginContext";
 
 const Board = () => {
+  const [isShowModal, setShowModal] = useState(false);
+  const { isLoggedIn } = useContext(LoginContext);
   const messages = [
     {
       text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam eaque, ut unde ipsam quos molestiae ab pariatur harum, enim, nobis obcaecati distinctio! Neque sapiente error excepturi enim sunt cum ipsum.",
@@ -25,6 +30,8 @@ const Board = () => {
 
   return (
     <div className="max-w-5xl mx-auto p-4">
+      <LoginButton setShowModal={setShowModal} />
+      {isShowModal && !isLoggedIn && <AuthModal setShowModal={setShowModal} />}
       {loading && <Loader />}
       {messages.toReversed().map((message) => (
         <div className="my-8" key={message._id}>
