@@ -12,10 +12,6 @@ const Board = () => {
   const { isLoggedIn } = useContext(LoginContext);
   const { comments } = useContext(DataContext);
 
-  const user = {
-    name: "Caro",
-    img: "",
-  };
   const loading = false;
 
   return (
@@ -28,7 +24,7 @@ const Board = () => {
       {loading && <Loader />}
       {comments.toReversed().map((message) => (
         <div className="my-8" key={message._id}>
-          <SinglePost user={user} message={message} />
+          <SinglePost message={message} />
         </div>
       ))}
     </div>

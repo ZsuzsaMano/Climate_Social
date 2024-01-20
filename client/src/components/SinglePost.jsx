@@ -3,7 +3,7 @@ import * as dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import { CgProfile } from "react-icons/cg";
 
-const SinglePost = ({ message, user }) => {
+const SinglePost = ({ message }) => {
   dayjs.extend(relativeTime);
   const date = message.createdAt;
   const d = dayjs(date).fromNow();
@@ -11,13 +11,9 @@ const SinglePost = ({ message, user }) => {
     <div className="container bg-white rounded-xl shadow-lg w-full">
       <div className="flex p-4 justify-between items-center">
         <div className="flex items-center space-x-2">
-          {user.img ? (
-            <img className="w-10 rounded-full" src={user.img} alt="author" />
-          ) : (
-            <CgProfile size={28} />
-          )}
+          <CgProfile size={28} />
           <h2 className="text-gray-800 font-bold cursor-pointer">
-            {user.name}
+            {message.userName}
           </h2>
         </div>
         <p className="">{d}</p>
