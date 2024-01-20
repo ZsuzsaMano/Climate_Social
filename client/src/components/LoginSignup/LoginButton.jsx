@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { LoginContext } from "../context/LoginContext";
+import { LoginContext } from "../../context/LoginContext";
 import { CgProfile } from "react-icons/cg";
 import { DropdownMenu } from "./DropdownMenu";
 

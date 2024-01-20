@@ -1,5 +1,5 @@
 import { useContext, useState } from "react";
-import { LoginContext } from "../context/LoginContext";
+import { LoginContext } from "../../context/LoginContext";
 
 export const AuthForm = ({ setShowModal }) => {
   const {
