@@ -89,7 +89,7 @@ const LoginContextProvider = (props) => {
         console.error(error);
       }
     } else {
-      setUser(null);
+      setUser("");
     }
   };
 
