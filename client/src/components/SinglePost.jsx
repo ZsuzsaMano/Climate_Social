@@ -28,6 +28,14 @@ const SinglePost = ({ message }) => {
     setComments(updatedComments);
   };
 
+  const handleDelete = () => {
+    deleteComment(message._id);
+    const updatedComments = comments.filter(
+      (comment) => comment._id !== message._id
+    );
+    setComments(updatedComments);
+  };
+
   return (
     <div className="container bg-white rounded-xl shadow-lg w-full">
       <div className="flex p-4 justify-between items-center">
@@ -67,7 +75,7 @@ const SinglePost = ({ message }) => {
         {isUserPost && (
           <span
             className="cursor-pointer hover:scale-125"
-            onClick={() => deleteComment(message._id)}
+            onClick={handleDelete}
           >
             <FaRegTrashAlt />
           </span>

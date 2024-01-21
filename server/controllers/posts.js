@@ -24,8 +24,8 @@ const updateComment = (req, res) => {
 
 
 const deleteComment = (req, res) => {
-  Comment.findById(req.params.id)
-    .then((comment) => comment.remove().then(() => res.json({ success: true })))
+  Comment.findByIdAndDelete(req.params.id)
+    .then(() => res.json({ success: true })) 
     .catch((err) => res.status(404).json({ success: false }));
 };
 
