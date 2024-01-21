@@ -41,4 +41,8 @@ const deleteUser = (req, res) => {
     .catch((err) => res.status(404).json(err.message));
 };
 
-module.exports={getUsers, updateUser, postUser, deleteUser}
+const getMe = (req,res)=>{
+  res.status(200).json(req.user);
+}
+
+module.exports={getUsers, updateUser, postUser, deleteUser, getMe}

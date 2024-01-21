@@ -2,7 +2,6 @@ const {User} =require( "../models/userSchema.js");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const { createJWT } = require("../utils/auth.js");
-require("dotenv").config({ path: "../config.env" });
 
 const emailRegexp =
   /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
@@ -78,41 +77,47 @@ const signin = (req, res) => {
   }
 
   if (errors.length > 0) {
-    res.status(500).json(errors[0]);
+    return res.status(500).json(errors[0]);
   }
 
-  User.findOne({ email: email })
+  User.findOne({ email })
     .then((user) => {
       if (!user) {
-        return res.status(404).json("user not found");
-      } else {
-        bcrypt.compare(password, user.password).then((isMatch) => {
+        return res.status(404).json("User not found");
+      }
+
+      bcrypt
+        .compare(password, user.password)
+        .then((isMatch) => {
           if (!isMatch) {
-            return res.status(400).json(" password incorrect");
+            return res.status(400).json("Incorrect password");
           }
 
-          const options = { expiresIn: 2592000 };
-          const payload = {
-            user: user.email,
-            id: user._id,
-          };
+          const options = { expiresIn: "7d" };
+          const payload = { sub: user._id, email: user.email };
+
           jwt.sign(payload, process.env.TOKEN_SECRET, options, (err, token) => {
             if (err) {
-              res.status(500).json(err.message);
-            } else {
-              return res.status(200).json({
-                success: true,
-                token: token,
-                message: user,
-              });
+              return res.status(500).json({ error: err.message });
             }
+
+            return res.status(200).json({
+              success: true,
+              token,
+              message: user,
+            });
           });
+        })
+        .catch((bcryptErr) => {
+          console.error("Error comparing passwords:", bcryptErr);
+          return res.status(500).json({ error: "Server error" });
         });
-      }
     })
     .catch((err) => {
-      res.status(500).json("errors");
+      console.error("Error finding user:", err);
+      return res.status(500).json({ error: "Server error" });
     });
 };
+
 
 module.exports={signin, signup}

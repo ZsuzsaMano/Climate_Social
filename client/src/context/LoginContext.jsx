@@ -1,4 +1,4 @@
-import React, { createContext, useState } from "react";
+import React, { createContext, useEffect, useState } from "react";
 import axios from "axios";
 import { config } from "../config";
 
@@ -75,6 +75,27 @@ const LoginContextProvider = (props) => {
       })
       .catch((err) => setErrorMessage(err?.response.data));
   };
+
+  const getActiveUser = async () => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      try {
+        const response = await axios.get(`${config.serverURL}/api/users/me`, {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+        setUser(response.data);
+        console.log("active user", response.data);
+      } catch (error) {
+        console.error(error);
+      }
+    } else {
+      setUser(null);
+    }
+  };
+
+  useEffect(() => {
+    getActiveUser().catch((e) => console.log(e));
+  }, []);
 
   return (
     <LoginContext.Provider

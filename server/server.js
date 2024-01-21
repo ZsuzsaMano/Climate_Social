@@ -9,6 +9,7 @@ require("dotenv").config({ path: "./config.env" });
 const users = require("./routes/users.js");
 const posts = require("./routes/posts.js");
 const authRoutes = require("./routes/auth.js");
+const { ConfigurePassport } = require("./utils/auth.js");
 
 
 
@@ -21,6 +22,7 @@ app.use(
   })
 );
 app.use(cors());
+ConfigurePassport()
 
 const port = process.env.PORT || 5000;
 
@@ -41,9 +43,6 @@ mongoose
 app.use("/api", authRoutes);
 app.use("/api/comments", posts);
 app.use("/api/users", users);
-
-
-
 
 
 // Start the Express server
