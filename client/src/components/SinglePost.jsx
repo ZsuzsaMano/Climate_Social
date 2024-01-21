@@ -3,13 +3,17 @@ import * as dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import { CgProfile } from "react-icons/cg";
 import { DataContext } from "../context/DataContext";
+import { FaRegTrashAlt } from "react-icons/fa";
+import { LoginContext } from "../context/LoginContext";
 
 const SinglePost = ({ message }) => {
-  const { updateComment } = useContext(DataContext);
+  const { updateComment, deleteComment } = useContext(DataContext);
+  const { user } = useContext(LoginContext);
   dayjs.extend(relativeTime);
   const date = message.createdAt;
   const d = dayjs(date).fromNow();
   const like = message.likeCount + 1;
+  const isUserPost = message.userName === user.name;
 
   return (
     <div className="container bg-white rounded-xl shadow-lg w-full">
@@ -34,7 +38,7 @@ const SinglePost = ({ message }) => {
           className="flex space-x-1 items-center"
           onClick={() => updateComment(message._id, like)}
         >
-          <span>
+          <span className="cursor-pointer hover:scale-125 ">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-7 w-7 text-red-500 hover:text-red-400 transition duration-100 cursor-pointer"
@@ -50,6 +54,14 @@ const SinglePost = ({ message }) => {
           </span>
           <span>{message.likeCount}</span>
         </div>
+        {isUserPost && (
+          <span
+            className="cursor-pointer hover:scale-125"
+            onClick={() => deleteComment(message._id)}
+          >
+            <FaRegTrashAlt />
+          </span>
+        )}
       </div>
     </div>
   );

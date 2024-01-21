@@ -1,9 +1,9 @@
 const express = require("express");
 const {
-  getComments, 
-  postComment, 
+  getComments,
+  postComment,
   updateComment,
-  deleteComment
+  deleteComment,
 } = require("../controllers/posts.js");
 
 

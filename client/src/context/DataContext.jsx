@@ -19,7 +19,7 @@ const DataContextProvider = (props) => {
       .then((res) => setComments(res.data))
       .catch((err) => console.log(err.message));
   };
-
+  //eslint-disable-next-line
   const updateComment = (id, likeCount) => {
     axios
       .patch(`${config.serverURL}/api/comments/${id}`, { likeCount: likeCount })
@@ -27,10 +27,16 @@ const DataContextProvider = (props) => {
       .catch((err) => console.log(err.message));
   };
 
+  const deleteComment = (id) => {
+    axios
+      .delete(`${config.serverURL}/api/comments/${id}`)
+      .then((res) => console.log("deleted"))
+      .catch((err) => console.log(err.message));
+  };
+
   useEffect(() => {
     getComments();
-  }, [updateComment]);
-  // eslint-disable-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <DataContext.Provider
@@ -41,6 +47,7 @@ const DataContextProvider = (props) => {
         setComments,
         getComments,
         updateComment,
+        deleteComment,
       }}
     >
       {props.children}
