@@ -84,7 +84,6 @@ const LoginContextProvider = (props) => {
           headers: { Authorization: `Bearer ${token}` },
         });
         setUser(response.data);
-        console.log("active user", response.data);
       } catch (error) {
         console.error(error);
       }
