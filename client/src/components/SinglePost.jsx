@@ -38,7 +38,7 @@ const SinglePost = ({ message }) => {
 
   return (
     <div className="container bg-white rounded-xl shadow-lg w-full">
-      <div className="flex p-4 justify-between items-center">
+      <div className="flex p-4 justify-between items-center bg-blue-100 rounded-md">
         <div className="flex items-center space-x-2">
           <CgProfile size={28} />
           <h2 className="text-gray-800 font-bold cursor-pointer">
