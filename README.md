@@ -17,6 +17,14 @@
 
 Welcome to the Climate Social
 
+## Features
+
+- **Sign In:** Create an account or log in to connect with others.
+- **Send Messages:** Share your thoughts and updates with the community.
+- **Like Messages:** Express your appreciation for messages that resonate with you.
+- **Delete Own Messages:** Manage your content by removing messages you no longer wish to share.
+- **Future Features:** Stay tuned for upcoming features, such as following other users and viewing followed users on your profile page.
+
 # Challenge - Fullstack Developer
 
 ## Scope:
@@ -48,6 +56,8 @@ assignment</li>
 - start writing documentation
 - sketch wireframe
 - create frontend logic
+- add auth
+- add img
 - finish styling
 
 ---
