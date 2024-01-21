@@ -50,7 +50,11 @@ const SinglePost = ({ message }) => {
       <div className="border border-gray-300 "></div>
       <div className="flex flex-wrap-reverse md:flex-nowrap">
         {message.img && (
-          <img className="w-full h-full" src={message.img} alt="post" />
+          <img
+            className="w-full h-full md:w-1/3"
+            src={message.img}
+            alt="post"
+          />
         )}
         <p className="py-8 px-4 md:px-16">{message.comment}</p>
       </div>
