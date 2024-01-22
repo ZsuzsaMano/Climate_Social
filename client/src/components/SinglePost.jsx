@@ -8,14 +8,14 @@ import { LoginContext } from "../context/LoginContext";
 
 const SinglePost = ({ message }) => {
   const { updateComment, deleteComment } = useContext(DataContext);
-  const { user } = useContext(LoginContext);
+  const { user, isLoggedIn } = useContext(LoginContext);
 
   dayjs.extend(relativeTime);
   const date = message.createdAt;
   const d = dayjs(date).fromNow();
 
   const like = message.likeCount + 1;
-  const isUserPost = message.userName === user.name;
+  const isUserPost = message.userName === user.name && isLoggedIn;
 
   return (
     <div className="container bg-white rounded-xl shadow-lg w-full">
