@@ -42,7 +42,7 @@ const SinglePost = ({ message }) => {
       <div className="flex p-4 justify-between">
         <div
           className="flex space-x-1 items-center"
-          onClick={() => updateComment(message._id, like)}
+          onClick={isLoggedIn ? () => updateComment(message._id, like) : null}
         >
           <span className="cursor-pointer hover:scale-125 ">
             <svg
