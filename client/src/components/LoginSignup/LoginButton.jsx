@@ -9,7 +9,9 @@ const LoginButton = ({ setShowModal }) => {
 
   return (
     <div className="relative">
-      <span className="text-red-600">Please login to be able to comment</span>
+      {!isLoggedIn && (
+        <span className="text-red-600">Please login to be able to comment</span>
+      )}
       <button
         className="ml-12 shadow-[3.0px_3.0px_3.0px_rgba(0,0,0,0.18)] rounded-md px-4"
         onClick={
