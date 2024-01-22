@@ -29,6 +29,7 @@ const InputBar = () => {
   };
 
   const addComment = (e) => {
+    const token = localStorage.getItem("token");
     e.preventDefault();
     axios
       .post(
@@ -42,6 +43,7 @@ const InputBar = () => {
         {
           headers: {
             "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
           },
         }
       )

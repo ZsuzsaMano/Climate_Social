@@ -21,8 +21,15 @@ const DataContextProvider = (props) => {
   };
   //eslint-disable-next-line
   const updateComment = (id, likeCount) => {
+    const token = localStorage.getItem("token");
     axios
-      .patch(`${config.serverURL}/api/comments/${id}`, { likeCount: likeCount })
+      .patch(
+        `${config.serverURL}/api/comments/${id}`,
+        { likeCount: likeCount },
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      )
       .then((res) => {
         const updatedComments = comments.map((comment) =>
           comment._id === id
@@ -35,8 +42,12 @@ const DataContextProvider = (props) => {
   };
 
   const deleteComment = (id) => {
+    const token = localStorage.getItem("token");
+
     axios
-      .delete(`${config.serverURL}/api/comments/${id}`)
+      .delete(`${config.serverURL}/api/comments/${id}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
       .then((res) => {
         const updatedComments = comments.filter(
           (comment) => comment._id !== id

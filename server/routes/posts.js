@@ -5,7 +5,7 @@ const {
   updateComment,
   deleteComment,
 } = require("../controllers/posts.js");
-
+const { jwtAuth } = require("../utils/auth.js");
 
 const router = express.Router();
 
@@ -15,15 +15,15 @@ router.get("/", getComments);
 
 //@route POST api/comments
 //@desc Create an comment
-router.post("/", postComment);
+router.post("/", jwtAuth, postComment);
 
 //@route PATCH api/comment/:id
 //@desc update a comment
-router.patch("/:id", updateComment);
+router.patch("/:id", jwtAuth, updateComment);
 
 //@route DELETE api/comments/:id
 //@desc DELETE a comment
-router.delete("/:id", deleteComment);
+router.delete("/:id", jwtAuth , deleteComment);
 
 
 
