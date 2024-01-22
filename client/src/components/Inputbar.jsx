@@ -7,7 +7,7 @@ import { config } from "../config";
 
 const InputBar = () => {
   const { user } = useContext(LoginContext);
-  const { getComments } = useContext(DataContext);
+  const { addComment } = useContext(DataContext);
 
   const [postComment, setPostComment] = useState("");
   const [image, setImage] = useState(null);
@@ -28,27 +28,8 @@ const InputBar = () => {
     return data;
   };
 
-  const addComment = (e) => {
-    const token = localStorage.getItem("token");
-    e.preventDefault();
-    axios
-      .post(
-        `${config.serverURL}/api/comments`,
-        JSON.stringify({
-          comment: postComment,
-          userId: user._id,
-          userName: user.name,
-          img: image,
-        }),
-        {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      )
-      .then((res) => getComments())
-      .catch((err) => console.log(err.message));
+  const handleComment = (e) => {
+    addComment(e, user, image, postComment);
     setPostComment("");
     setImage("");
   };
@@ -88,7 +69,7 @@ const InputBar = () => {
           ></textarea>
         </div>
         <button
-          onClick={addComment}
+          onClick={handleComment}
           className="w-full md:w-2/3 mt-4 bg-blue-600 text-white active:bg-emerald-600 font-bold uppercase  py-1 rounded shadow hover:shadow-lg outline-none focus:outline-none ease-linear transition-all duration-150"
         >
           SEND
