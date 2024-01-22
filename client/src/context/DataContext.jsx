@@ -19,7 +19,7 @@ const DataContextProvider = (props) => {
       .then((res) => setComments(res.data))
       .catch((err) => console.log(err.message));
   };
-  //eslint-disable-next-line
+
   const updateComment = (id, likeCount) => {
     const token = localStorage.getItem("token");
     axios

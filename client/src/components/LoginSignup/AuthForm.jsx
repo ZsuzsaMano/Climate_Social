@@ -67,7 +67,7 @@ export const AuthForm = ({ setShowModal }) => {
           required
           minLength={6}
         />
-        <p className="text-red text-xs">{errorMessage}</p>
+        <p className="text-red-500 text-xs">{errorMessage}</p>
         <button
           className="text-blue-500 md:text-xs text-left"
           onClick={() => {
