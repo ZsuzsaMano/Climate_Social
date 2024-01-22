@@ -1,7 +1,9 @@
 <section align="center">
-  <!-- <a href="https://starwars-squad.netlify.app/">
+  <a href="https://climate-social.onrender.com/">
     <img src="./readme.png" alt="Logo" >
-  </a> -->
+  </a>
+  <br>
+/click image to go to deployed version/
   <br>
     <br>
  <p>Built with: MERN  MongoDB, Express, React, Node, 
@@ -59,6 +61,9 @@ assignment</li>
 - add auth
 - add img
 - finish styling
+- secure routes in backend
+- deploy
+- planned: refactor
 
 ---
 
