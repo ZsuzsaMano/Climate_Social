@@ -7,6 +7,7 @@ import LoginContextProvider from './context/LoginContext';
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Profile from './Profile';
 import Header from './components/Header';
+import Footer from './components/Footer';
 
 const router = createBrowserRouter([
   {
@@ -25,6 +26,7 @@ root.render(
     <LoginContextProvider>
       <Header />
       <RouterProvider router={router} />
+      <Footer/>
     </LoginContextProvider>
   </React.StrictMode>
 );
