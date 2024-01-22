@@ -9,7 +9,6 @@ function App() {
   return (
     <div className="max-w-5xl mx-auto">
       <DataContextProvider>
-        <Header />   
         <Board />
       </DataContextProvider>
     </div>
