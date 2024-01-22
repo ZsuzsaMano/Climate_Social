@@ -2,8 +2,7 @@ import React, { useContext, useState } from "react";
 import { LoginContext } from "../context/LoginContext";
 import { DataContext } from "../context/DataContext";
 import { BiSolidCloudUpload } from "react-icons/bi";
-import axios from "axios";
-import { config } from "../config";
+import { imagebase64 } from "../utils/image";
 
 const InputBar = () => {
   const { user } = useContext(LoginContext);
@@ -16,16 +15,6 @@ const InputBar = () => {
     const file = e.target.files[0];
     const image = await imagebase64(file);
     setImage(image);
-  };
-
-  const imagebase64 = (file) => {
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    const data = new Promise((res, rej) => {
-      reader.onload = () => res(reader.result);
-      reader.onerror = (err) => rej(err);
-    });
-    return data;
   };
 
   const handleComment = (e) => {
