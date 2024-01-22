@@ -3,7 +3,7 @@
     <img src="./readme.png" alt="Logo" >
   </a>
   <br>
-/click image to go to deployed version/
+<!-- /click image to go to deployed version/ -->
   <br>
     <br>
  <p>Built with: MERN  MongoDB, Express, React, Node, 
