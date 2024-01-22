@@ -23,14 +23,26 @@ const DataContextProvider = (props) => {
   const updateComment = (id, likeCount) => {
     axios
       .patch(`${config.serverURL}/api/comments/${id}`, { likeCount: likeCount })
-      .then((res) => console.log("liked"))
+      .then((res) => {
+        const updatedComments = comments.map((comment) =>
+          comment._id === id
+            ? { ...comment, likeCount: comment.likeCount + 1 }
+            : comment
+        );
+        setComments(updatedComments);
+      })
       .catch((err) => console.log(err.message));
   };
 
   const deleteComment = (id) => {
     axios
       .delete(`${config.serverURL}/api/comments/${id}`)
-      .then((res) => console.log("deleted"))
+      .then((res) => {
+        const updatedComments = comments.filter(
+          (comment) => comment._id !== id
+        );
+        setComments(updatedComments);
+      })
       .catch((err) => console.log(err.message));
   };
 

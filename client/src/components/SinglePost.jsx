@@ -7,8 +7,7 @@ import { FaRegTrashAlt } from "react-icons/fa";
 import { LoginContext } from "../context/LoginContext";
 
 const SinglePost = ({ message }) => {
-  const { updateComment, deleteComment, comments, setComments } =
-    useContext(DataContext);
+  const { updateComment, deleteComment } = useContext(DataContext);
   const { user } = useContext(LoginContext);
 
   dayjs.extend(relativeTime);
@@ -17,24 +16,6 @@ const SinglePost = ({ message }) => {
 
   const like = message.likeCount + 1;
   const isUserPost = message.userName === user.name;
-
-  const handleLike = () => {
-    updateComment(message._id, like);
-    const updatedComments = comments.map((comment) =>
-      comment._id === message._id
-        ? { ...comment, likeCount: comment.likeCount + 1 }
-        : comment
-    );
-    setComments(updatedComments);
-  };
-
-  const handleDelete = () => {
-    deleteComment(message._id);
-    const updatedComments = comments.filter(
-      (comment) => comment._id !== message._id
-    );
-    setComments(updatedComments);
-  };
 
   return (
     <div className="container bg-white rounded-xl shadow-lg w-full">
@@ -59,7 +40,10 @@ const SinglePost = ({ message }) => {
         <p className="py-8 px-4 md:px-16">{message.comment}</p>
       </div>
       <div className="flex p-4 justify-between">
-        <div className="flex space-x-1 items-center" onClick={handleLike}>
+        <div
+          className="flex space-x-1 items-center"
+          onClick={() => updateComment(message._id, like)}
+        >
           <span className="cursor-pointer hover:scale-125 ">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -79,7 +63,7 @@ const SinglePost = ({ message }) => {
         {isUserPost && (
           <span
             className="cursor-pointer hover:scale-125"
-            onClick={handleDelete}
+            onClick={() => deleteComment(message._id)}
           >
             <FaRegTrashAlt />
           </span>
