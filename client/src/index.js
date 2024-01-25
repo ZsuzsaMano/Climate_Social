@@ -4,12 +4,29 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import LoginContextProvider from './context/LoginContext';
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import Profile from './Profile';
+import Header from './components/Header';
+import Footer from './components/Footer';
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <App />,
+  },
+  {
+    path: "/profile",
+    element: <Profile />,
+  },
+]);
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <LoginContextProvider>
-      <App />
+      <Header />
+      <RouterProvider router={router} />
+      <Footer/>
     </LoginContextProvider>
   </React.StrictMode>
 );

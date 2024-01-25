@@ -20,6 +20,29 @@ const DataContextProvider = (props) => {
       .catch((err) => console.log(err.message));
   };
 
+  const addComment = (e, user, image, postComment) => {
+    const token = localStorage.getItem("token");
+    e.preventDefault();
+    axios
+      .post(
+        `${config.serverURL}/api/comments`,
+        JSON.stringify({
+          comment: postComment,
+          userId: user._id,
+          userName: user.name,
+          img: image,
+        }),
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      )
+      .then((res) => getComments())
+      .catch((err) => console.log(err.message));
+  };
+
   const updateComment = (id, likeCount) => {
     const token = localStorage.getItem("token");
     axios
@@ -69,6 +92,7 @@ const DataContextProvider = (props) => {
         comments,
         setComments,
         getComments,
+        addComment,
         updateComment,
         deleteComment,
       }}

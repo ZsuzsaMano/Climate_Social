@@ -18,8 +18,8 @@ const SinglePost = ({ message }) => {
   const isUserPost = message.userName === user.name && isLoggedIn;
 
   return (
-    <div className="container bg-white rounded-xl shadow-lg w-full">
-      <div className="flex p-4 justify-between items-center bg-blue-100 rounded-md">
+    <div className="container bg-white rounded-xl shadow-lg w-full mx-auto">
+      <div className="flex p-4 justify-between items-center bg-blue-100 rounded-t-md">
         <div className="flex items-center space-x-2">
           <CgProfile size={28} />
           <h2 className="text-gray-800 font-bold cursor-pointer">
@@ -28,7 +28,6 @@ const SinglePost = ({ message }) => {
         </div>
         <p className="">{d}</p>
       </div>
-      <div className="border border-gray-300 "></div>
       <div className="flex flex-wrap-reverse md:flex-nowrap">
         {message.img && (
           <img
@@ -39,6 +38,7 @@ const SinglePost = ({ message }) => {
         )}
         <p className="py-8 px-4 md:px-16">{message.comment}</p>
       </div>
+      <div className="border border-gray-300 "></div>
       <div className="flex p-4 justify-between">
         <div
           className="flex space-x-1 items-center"

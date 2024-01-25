@@ -1,7 +1,6 @@
 // Import required packages
 const express = require("express");
 const mongoose = require("mongoose");
-const http = require("http");
 const cors = require("cors");
 const bodyParser =require("body-parser");
 require("dotenv").config({ path: "./config.env" });
@@ -14,6 +13,9 @@ const { ConfigurePassport } = require("./utils/auth.js");
 
 
 const app = express();
+
+// Middleware configuration
+// parsing JSON and URL-encoded request bodies
 app.use(bodyParser.json({ limit: "30mb", extended: true }));
 app.use(
   bodyParser.urlencoded({
@@ -21,15 +23,19 @@ app.use(
     extended: true,
   })
 );
+
+//enabling Cross-Origin Resource Sharing
 app.use(cors());
+
+//set up Passport for authentication
 ConfigurePassport()
 
 const port = process.env.PORT || 5000;
 
-// In the MongoDB Atlas connection string. Replace '<password>' with your actual password
+//the MongoDB Atlas connection string
 const connectionString = process.env.ATLAS_URI;
   
-// Connect to MongoDB Atlas
+// Connects to the MongoDB database using Mongoose
 mongoose
   .connect(connectionString, {})
   .then(() => {
@@ -39,13 +45,13 @@ mongoose
     console.error("Connection error", err);
   });
 
-// Routes
+// Associates route paths with their respective route handler modules.
 app.use("/api", authRoutes);
 app.use("/api/comments", posts);
 app.use("/api/users", users);
 
 
-// Start the Express server
+// Starts the Express server and listens for incoming HTTP requests on the specified port.
 app.listen(port, () => {
   console.log(`Express server running at http://localhost:${port}`);
 });
